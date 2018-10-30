@@ -39,8 +39,18 @@
   创建
   使用
 
+  promise 没有最终完成，如需用全 需结合generator使用
 
-8. generator
+8. generator 需结合asyce、awaec
+
+
 9. json 标准格式
 
 不兼容低级浏览器，需编译
+
+## homework
+开源协议 读写
+https://gitee.com/oschina/git-osc/wikis/License?sort_id=77
+
+codewars地址
+www.codewars.com

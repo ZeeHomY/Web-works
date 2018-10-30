@@ -6,10 +6,24 @@
     <script src="jquery.js" charset="utf-8"></script>
     <script type="text/javascript">
 
-      let p = new Promise(function (resolve, reject) {  //解决， 拒绝
+      let p1 = new Promise(function (resolve, reject) {  //解决， 拒绝
 
         $.ajax({
           url: 'data/1.txt',
+          dataType: 'json',
+          success (res) {
+            resolve(res);     //
+          },error (err) {
+            reject(err);      //
+          }
+        });
+
+      });
+
+      let p2 = new Promise(function (resolve, reject) {  //解决， 拒绝
+
+        $.ajax({
+          url: 'data/2.txt',
           dataType: 'json',
           success (res) {
             resolve(res);
@@ -20,12 +34,36 @@
 
       });
 
-      p.then(res => {
+      let p3 = new Promise(function (resolve, reject) {  //解决， 拒绝
+
+        $.ajax({
+          url: 'data/3.txt',
+          dataType: 'json',
+          success (res) {
+            resolve(res);
+          },error (err) {
+            reject(err);
+          }
+        });
+
+      });
+
+      p1.then(res => {
         alert('chenggong' + res);
       }, err => {
         alert('shibaile');
       });
 
+      Promise.all([p1, p2, p3]).then(res_arr => {    // 全成功后then
+        console.log(res_arr);    // 结果数组
+
+        let [r1, r2, r3] = res_arr;      // 结构赋值
+
+        console.log(r1, r2, r3);
+
+      }, err => {
+        alert('ceuole');
+      });
     </script>
   </head>
   <body>
