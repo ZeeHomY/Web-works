@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript">
+
+      // 用作型参，接收剩余参数（必须是最后一个参数）
+      function show (a, b, ...arg) {
+        alert(arg);
+
+      }
+      show(12, 5, 8, 31, 57, 26);
+
+      // filter true的留下
+      let arr = [12, 5, 8, 99, 27, 24, 30, 13];
+
+      let arr2 = arr.filter(item => item % 2 !== 0);  // 两个取奇数结果相同
+      let arr3 = arr.filter(item => item % 2);   // 因为filter正好以true/false区分，而奇偶结果为0偶或非0奇
+
+      console.log(arr2, arr3);
+
+      // 求和
+      let sum = arr.reduce((tmp, item, index) => {
+        return tmp + item;
+      });
+
+      console.log(sum);
+
+      // 平均数
+      let avw = arr.reduce((tmp, item, index) => {
+        if (index < arr.length - 1) {
+          return tmp + item;
+        } else {
+          return (tmp + item) / arr.length;
+        }
+
+      });
+
+      console.log(avw);
+
+      // 模版字符串
+      let str = `avc  r b
+      ef`;
+      alert(str);
+      console.log(str);
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript">
+      class User {
+        constructor(name, pass) {
+          this.name = name;
+          this.pass = pass;
+        }
+
+        login () {
+          alert('超类login chenggong');
+        }
+      }
+
+      let u = new User('blue', '1234');
+
+      // u.login();
+
+      class VIPUser extends User {
+        constructor(name, pass, level) {
+          super(name, pass);
+
+          this.level = level;
+        }
+
+        download () {
+          alert('子类下载');
+        }
+      }
+
+      let v = new VIPUser('bule', '12345', 8);
+
+      console.log(v.name, v.pass, v.level);
+      v.login();
+      v.download();
+
+      alert(v instanceof User);
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>
