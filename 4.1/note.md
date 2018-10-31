@@ -49,8 +49,8 @@
 不兼容低级浏览器，需编译
 
 ## homework
-开源协议 读写
+1. 开源协议 读写
 https://gitee.com/oschina/git-osc/wikis/License?sort_id=77
 
-codewars地址
+2. codewars地址
 www.codewars.com

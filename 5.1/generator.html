@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript">
+
+      function *show (a, b) {
+
+        alert('a');
+        console.log(a, b);
+
+        let c = yield 12;
+        console.log(c);
+
+        alert('b');
+
+        return 5;
+      }
+
+      let obj = show(1, 2);
+
+      let res1 = obj.next(233);
+      console.log(res1);    // yield值
+
+      let res2 = obj.next();
+      console.log(res2);   // return值
+
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>
