@@ -17,3 +17,23 @@ yield
 
   Server: Microsoft-IIS/10
    确认被占用。在服务中关闭World Wide Web Publishing Service 服务。重启wamp服务后，打开正常。
+
+## node模块化（CMD模式）
+
+- seaJS和requireJS的用法被Node借鉴
+-
+  “html”中引js: use()
+  js中引js：require()
+
+- seaJS、requireJS中
+  require('./1.js')可以有‘./’，也可不用。
+  但在node中必须有‘./’，不加会报错。
+  （因为node中不仅有自定义模块，也有系统模块（http模块。。。），可能会有同名系统模块。
+  不加‘./’则为引用系统.so必须加‘./’。）
+  手动建立node_modules文件夹放入js文件，则不用加‘./’。（是否必须省略？）
+
+1. 没有defined
+2. 有export是、requier、module
+3. 引用自定义模块
+   1. 放到node_modules文件夹(官方推荐)
+   2. 前面加‘./’
