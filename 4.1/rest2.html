@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script>
+    
+    // 一、剩余参数（rest parameter ）
+    function show(a, b, ...args) {        // 使用剩余参数(...args)(形参)中的args，将args初始化为 数组
+      
+      alert(a);
+      alert(a);
+      alert(args);
+
+    };
+
+    // show(12, 14 ,16 , 17 ,19);
+
+    // 二、扩展数组
+    // eg.1
+    let arr = [1, 2, 3];     // 将arr转为内容序列
+
+    function showRest(a, b, c) {
+      
+      alert(a);
+      alert(b);
+      alert(c);
+
+    };
+
+    showRest(...arr);  // ...arr <=> 1, 2, 3
+
+    // eg.2
+    let arr1 = [1, 2, 3];
+    let arr2 = [5, 6, 7];
+    let arrs = [...arr1, ...arr2];
+
+    console.log(arrs);
+
+
+    // 三、组合使用
+    function show2(...args) {      // '...'+变量 作为剩余参数给args赋值 
+      fn(...args);                 // '...'将args转为内容序列
+    };
+
+    function fn(a, b) {
+      alert(a + b);
+    };
+
+    // show2(12, 5);
+  </script>
+</head>
+<body>
+  
+</body>
+</html>
