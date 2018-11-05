@@ -30,7 +30,7 @@ yield
   但在node中必须有‘./’，强制在当前目录下寻找，不加会报错。
   （因为node中不仅有自定义模块，也有系统模块（http模块。。。），可能会有同名系统模块。
   不加‘./’则为引用系统.so必须加‘./’。）
-  手动建立node_modules文件夹放入js文件，则不用加‘./’。（是否必须省略？）
+  手动建立node_modules文件夹放入js文件，则不用加‘./’。（必须省略）
 
 1. 不需要像saeJS、requireJS一样写defined
 2. 有export是、requier、module
