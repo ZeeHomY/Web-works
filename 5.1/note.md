@@ -33,7 +33,15 @@ yield
   手动建立node_modules文件夹放入js文件，则不用加‘./’。（必须省略）
 
 1. 不需要像saeJS、requireJS一样写defined
-2. 有export是、requier、module
+2. 有exports、requier、module
 3. 引用自定义模块
    1. 放到node_modules文件夹(官方推荐)
    2. 前面加‘./’
+
+- 初始化自己的包 init
+
+  1. 进到创建好的文件夹中
+      * 测试驱动开发
+  2. 按照步骤生成package.json（有入口路径）
+  3. 放到node_modules目录下
+  4. 在文件中requier使用
