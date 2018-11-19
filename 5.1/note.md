@@ -45,3 +45,20 @@ yield
   2. 按照步骤生成package.json（有入口路径）
   3. 放到node_modules目录下
   4. 在文件中requier使用
+
+### 小结：
+#### 三大主流方法：
+1. seajs，requirejs      // 民间
+  CMD（common module depnation github）、AMD规范   ，在规范上没有区别，在实现上有区别
+  模块.js 文件里有  define   会带有require、exports，exports带出了moudle
+
+  前台html中运行：use()                    // 循环引用
+
+2. nodejs (CMD)          // 用语言自身来实现，并不能算官方（ECMA）。
+  require、exports、moudle
+  node_modules 或者用‘./’
+
+3. ES6                // 官方
+   export/import
+   1. babel    // 直接编译（编译模块稍弱）（也能通过设置编译模块）
+   2. webpack  一站式开发 集成 ES6编译、模块编译、打包、压缩、生成source map等。
