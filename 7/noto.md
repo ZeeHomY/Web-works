@@ -10,4 +10,4 @@
   seajs.use('lib/1.js', function (mod){});
 
 ### 手写seaJS方式组件
-seajs中引用文件方式，为类ajax方式。
+seajs中引用文件方式，为类ajax方式。 (有关ajax2.0)
