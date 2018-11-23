@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<script src="my_seajs/jquery.js"></script>
+	<script>
+
+		class Promise2 {
+
+			constructor (fn) {
+				const _this = this;
+
+				this.__queue =[];          // 等待队列
+
+				this.__succ_res = null;
+				this.__erro_res = null;
+
+				this.status = '';
+
+				fn(function (...arg) {           // 函数参数的内部操作
+
+					_this.__succ_res = arg;
+					_this.status = 'succ';
+
+					_this.__queue.forEach(json => {
+						
+						json.res(...arg);
+
+					});
+
+				}, function (...arg) {
+					
+					_this.__erro_res = arg;
+					_this.status = 'erro';
+
+					_this.__queue.forEach(json => {
+						
+						json.rej(...arg);
+
+					});
+
+				});
+			}
+
+			then (res, rej) {
+
+				if (this.status === 'succ') {
+
+					res(...this.__succ_res);
+					
+				} else if (this.status === 'erro') {
+
+					rej(...this.__erro_res);
+
+				} else {
+
+					this.__queue.push({res, rej});
+
+				}
+			}
+		}
+
+		Promise2.all = function (proArr) {  						// arr中都是promise对象
+			
+			let resultArr = [];
+			return new Promise2(function (resolve, reject) {
+				
+				let i = 0;
+
+				function next() {
+					proArr[i].then(function (res) {
+						resultArr.push(res);
+
+						i++;
+						if (i === proArr.length) {
+							resolve();
+						} else {
+							next();
+						}
+						
+					}, reject);
+				}
+
+				next();
+			});
+		};
+
+		let p = new Promise2(function (resolve, reject) {  // 参数是两个函数
+			setTimeout(() => {
+				resolve(12);
+			}, 500);
+		});
+	
+		p.then(function (num) {
+			alert(num);
+		}, function () {
+			alert('shibai1');
+		});
+
+		Promise2.all([
+			$.ajax({url: 'data/1.txt', dataType: 'json'}),
+			$.ajax({url: 'data/2.txt', dataType: 'json'})
+		]).then(resArr => {
+
+			alert('成功');
+			console.log(resArr);
+		}, err => {
+			alert('失败');
+		});
+	</script>
+</head>
+<body>
+    
+</body>
+</html>

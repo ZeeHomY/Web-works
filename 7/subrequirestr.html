@@ -19,7 +19,7 @@
       let str = show.toString();
       str = str.substring(str.indexOf('{') + 1, str.lastIndexOf('}'));   // 获取函数体内部的内容
 
-      alert(str.match(/require\([^\(\)]+\)/g));
+      alert(str.match(/require\([^\(\)]+\)/g));   // ["require('aaa')", "require('bbb')"]
     </script>
   </head>
   <body>

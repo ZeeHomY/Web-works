@@ -1,5 +1,5 @@
 define(function (require, exports, module) {
 
-  exports.num12 = 6;
+  exports.num2 = 6;
 
 });
