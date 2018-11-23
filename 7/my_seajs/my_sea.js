@@ -22,9 +22,20 @@ const sea = {
         // 软编译 读取根模块内部所有require
         let tmp = str.substring(str.indexOf('{') + 1, str.lastIndexOf('}'));   // 获取函数体内部的内容
 
-        alert(tmp.match(/require\([^\(\)]+\)/g));
+        let arr = tmp.match(/require\([^\(\)]+\)/g).map(item => {
 
-        eval(str);    // 执行根模块
+          if (item.indexOf('"') !== -1) {
+            return item.substring(item.indexOf('"') + 1, item.lastIndexOf('"'));
+          } else {
+            return item.substring(item.indexOf("'") + 1, item.lastIndexOf("'"));
+          }
+
+        });
+
+        alert(arr);
+
+        // 执行根模块
+        eval(str);
       },
       error () {
         alert('失败');
