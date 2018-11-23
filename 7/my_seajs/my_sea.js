@@ -10,15 +10,21 @@ const sea = {
             exports: { }
           };
 
-          fn(function () {         // 调用fn使模块define的回调函数执行.执行时会调用第一个参数函数，
-                                   // 操作后两个对象参数，使得use的回调可以使用变化后的module对象
+          // 调用fn使模块define的回调函数执行.执行时会调用第一个参数函数，
+          // 操作后两个对象参数，使得use的回调可以使用变化后的module对象
+          fn(function () {            // 定义require
 
           }, module.exports, module);
 
           fn_end(module.exports);  //
         }
 
-        eval(str);    //
+        // 软编译 读取根模块内部所有require
+        let tmp = str.substring(str.indexOf('{') + 1, str.lastIndexOf('}'));   // 获取函数体内部的内容
+
+        alert(tmp.match(/require\([^\(\)]+\)/g));
+
+        eval(str);    // 执行根模块
       },
       error () {
         alert('失败');
