@@ -20,24 +20,24 @@
 
 				this.status = '';
 
-				fn(function (...arg) {           // 函数参数的内部操作
+				fn(function (...arg) {           // 函数参数的内部操作   两个函数参数会在fn运行时（new Promise接近结尾时）调用
 
 					_this.__succ_res = arg;
 					_this.status = 'succ';
 
-					_this.__queue.forEach(json => {
-						
+					_this.__queue.forEach(json => {    // 成功后把队列中的成功
+
 						json.res(...arg);
 
 					});
 
 				}, function (...arg) {
-					
+
 					_this.__erro_res = arg;
 					_this.status = 'erro';
 
 					_this.__queue.forEach(json => {
-						
+
 						json.rej(...arg);
 
 					});
@@ -50,7 +50,7 @@
 				if (this.status === 'succ') {
 
 					res(...this.__succ_res);
-					
+
 				} else if (this.status === 'erro') {
 
 					rej(...this.__erro_res);
@@ -64,10 +64,10 @@
 		}
 
 		Promise2.all = function (proArr) {  						// arr中都是promise对象
-			
+
 			let resultArr = [];
 			return new Promise2(function (resolve, reject) {
-				
+
 				let i = 0;
 
 				function next() {
@@ -80,7 +80,7 @@
 						} else {
 							next();
 						}
-						
+
 					}, reject);
 				}
 
@@ -89,12 +89,18 @@
 		};
 
 		let p = new Promise2(function (resolve, reject) {  // 参数是两个函数
-			setTimeout(() => {
+			setTimeout(() => {                  // 打印顺序为 成功 、 12 .执行顺序：new Promise2 内部程序 fn参数函数、 settimeout、new Promise2结尾结束
+																					// p.then运行（为挂起） promise。all执行、return时连带运行new Promise2 fn（）实参中的next（）【proArr为两个promise对象】
+																					// next执行了一次 ，parArr[0].then运行为走内部程序，all.them运行（为挂起），整个script结束 两个ajax请求、
 				resolve(12);
 			}, 500);
+
+			// $.ajax({url: 'data/2.txt', dataType: 'json',success: function () {   // 变成使用ajax后 打印顺序为 ‘12’、‘成功’
+			// 	resolve(12);
+			// }})
 		});
-	
-		p.then(function (num) {
+		p.then(function (num) {   // .then()的意义：如果直接成功就直接运行成功函数，如果状态没有变化，就放到构造时的成功函数中运行。（它们共用相同的返回结果，）
+															// .then提供成功函数，“构造时”提供返回结果
 			alert(num);
 		}, function () {
 			alert('shibai1');
@@ -113,6 +119,6 @@
 	</script>
 </head>
 <body>
-    
+
 </body>
 </html>
