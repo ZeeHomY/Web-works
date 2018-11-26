@@ -92,7 +92,8 @@
 		let p = new Promise2(function (resolve, reject) {      	// 参数是两个函数
 			setTimeout(() => {      // 打印顺序为 成功 、 12 .执行顺序：new Promise2 内部程序 fn参数函数、 settimeout、new Promise2结尾结束
 															// p.then运行（为挂起） promise。all执行、return时连带运行new Promise2 fn（）实参中的next（）【proArr为两个promise对象】
-															// next执行了一次 ，parArr[0].then运行未走内部程序，all.them运行（为挂起），整个script结束 两个ajax请求、
+															// next执行了一次 ，parArr[0].then运行未走内部程序(此时的then不是自己定义的then（是jQ的）,运行位置在其源码内部)，
+															// all.them运行（为挂起），整个script结束 两个ajax请求回调运行proArr.then，两次运行jq的成功函数后调用自定义的resolve().
 				resolve(12);
 			}, 500);
 
