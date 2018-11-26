@@ -63,9 +63,10 @@
 			}
 		}
 
-		Promise2.all = function (proArr) {  						// arr中都是promise对象
+		Promise2.all = function (proArr) {  						// arr中都是promise对象 .all返回一个定制的promise实例
 
 			let resultArr = [];
+
 			return new Promise2(function (resolve, reject) {
 
 				let i = 0;
@@ -88,10 +89,10 @@
 			});
 		};
 
-		let p = new Promise2(function (resolve, reject) {  // 参数是两个函数
-			setTimeout(() => {                  // 打印顺序为 成功 、 12 .执行顺序：new Promise2 内部程序 fn参数函数、 settimeout、new Promise2结尾结束
-																					// p.then运行（为挂起） promise。all执行、return时连带运行new Promise2 fn（）实参中的next（）【proArr为两个promise对象】
-																					// next执行了一次 ，parArr[0].then运行为走内部程序，all.them运行（为挂起），整个script结束 两个ajax请求、
+		let p = new Promise2(function (resolve, reject) {      	// 参数是两个函数
+			setTimeout(() => {      // 打印顺序为 成功 、 12 .执行顺序：new Promise2 内部程序 fn参数函数、 settimeout、new Promise2结尾结束
+															// p.then运行（为挂起） promise。all执行、return时连带运行new Promise2 fn（）实参中的next（）【proArr为两个promise对象】
+															// next执行了一次 ，parArr[0].then运行未走内部程序，all.them运行（为挂起），整个script结束 两个ajax请求、
 				resolve(12);
 			}, 500);
 
@@ -99,6 +100,7 @@
 			// 	resolve(12);
 			// }})
 		});
+
 		p.then(function (num) {   // .then()的意义：如果直接成功就直接运行成功函数，如果状态没有变化，就放到构造时的成功函数中运行。（它们共用相同的返回结果，）
 															// .then提供成功函数，“构造时”提供返回结果
 			alert(num);
