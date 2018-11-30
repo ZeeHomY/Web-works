@@ -5,14 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <script src="http://localhost:8080/socket.io/socket.io.js"></script>   <!-- sdf -->
+    <script src="http://localhost:3000/socket.io/socket.io.js" charset="utf-8"></script>   <!-- sdf -->
     <script>
-        let sock = io.connect('ws://localhost:8080/');  // ws协议
+        let sock = io.connect('ws://localhost:3000/');  // ws协议
 
-        document.onclick = function (event) {
+        // document.onclick = function (event) {
             
-            sock.emit('a', 12, 5);
-        };
+        //     sock.emit('a', 12, 5);
+        // };
+
+        sock.on('eee', function (n) {
+            console.log(`接到:${n}`);
+        });
     </script>
 </head>
 <body>
